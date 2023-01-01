@@ -1,0 +1,5 @@
+/.clj-kondo
+/.lsp
+/deps/
+/test/lua/
+/doc/tags
