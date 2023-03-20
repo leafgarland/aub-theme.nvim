@@ -16,6 +16,7 @@
               : red
               : green
               : orange
+              : yellow
               : blue
               : purple
               : cyan
@@ -41,11 +42,12 @@
   (hl :CursorIM {})
   (hl :CursorColumn {})
   (hl :CursorLine {:bg (color.mix mix3 paper 0.6)})
-  (hl :Directory {:bold true})
+  (hl :Directory { :fg accent :bold true})
   (hl :DiffAdd {:bg (color.mix green paper 0.5)})
   (hl :DiffChange {})
   (hl :DiffDelete {:bg (color.mix red paper 0.5)})
-  (hl :DiffText {:fg paper :bg accent :bold true})
+  (hl :DiffText {:bg (color.mix blue paper 0.4)})
+  ; (hl :DiffText {:fg paper :bg accent})
   (hl :TermCursor {:reverse true}) 
   (hl :TermCursorNC {}) 
   (hl :ErrorMsg {:fg red_fg}) 
@@ -84,13 +86,13 @@
   (hl :User2 {:fg accent2 :bg ui :bold true}) 
   (hl :User3 {:fg mix2 :bg ui :bold true}) 
   (hl :User4 {:fg green :bg ui :bold true}) 
-  (hl :StatusModeNormal {:fg paper :bg mix1}) 
-  (hl :StatusModeInsert {:fg paper :bg accent}) 
-  (hl :StatusModeCommand {:fg ui :bg red_fg :bold true}) 
-  (hl :StatusModeVisual {:fg ui :bg green_fg}) 
-  (hl :StatusModeVisualBlock {:fg ui :bg orange}) 
-  (hl :StatusModeVisualLine {:fg paper :bg green_fg}) 
-  (hl :StatusModeTerminal {:fg paper :bg accent2 :bold true}) 
+  (hl :StatusModeNormal {:fg mix1 :bg ui}) 
+  (hl :StatusModeInsert {:fg accent :bg ui}) 
+  (hl :StatusModeCommand {:fg red_fg :bg ui}) 
+  (hl :StatusModeVisual {:fg green_fg :bg ui}) 
+  (hl :StatusModeVisualBlock {:fg green_fg :bg ui}) 
+  (hl :StatusModeVisualLine {:fg green_fg :bg ui}) 
+  (hl :StatusModeTerminal {:fg accent2 :bg ui}) 
   (hl :StatusLineError {:bg ui :fg red_fg}) 
   (hl :StatusLineWarn {:bg ui :fg orange}) 
   (hl :TabLine {:bg ui :fg ui_fg}) 
@@ -120,16 +122,16 @@
   (hl :LspReferenceWrite {:link :LspReferenceText}) 
   (hl :DiagnosticError {:fg red_fg}) 
   (hl :DiagnosticWarn {:fg orange_fg}) 
-  (hl :DiagnosticInfo {:fg accent}) 
+  (hl :DiagnosticInfo {:fg blue}) 
   (hl :DiagnosticHint {:fg mix2}) 
   (hl :DiagnosticVirtualTextError {:bg (color.mix paper red_fg 0.30) :fg red_fg}) 
   (hl :DiagnosticVirtualTextWarn {:bg (color.mix paper orange_fg 0.30) :fg orange_fg}) 
-  (hl :DiagnosticVirtualTextInfo {:bg (color.mix paper accent 0.30) :fg accent}) 
+  (hl :DiagnosticVirtualTextInfo {:bg (color.mix paper blue 0.30) :fg blue}) 
   (hl :DiagnosticVirtualTextHint {:bg (color.mix paper mix2 0.30) :fg mix2}) 
   (hl :LspCodeLens {:link :DiagnosticVirtualTextHint}) 
   (hl :TSStringEscape {:fg accent2})
   (hl :TSFunction {:bold true}) 
-  (hl "@punctuation.special" {:fg accent2 :bold true}) 
+  (hl "@punctuation.special" {:fg yellow :bold true}) 
   (hl "@symbol.clojure" {:bold false}) 
   (hl "@symbol.keyword.clojure" {:bold true}) 
   (hl "@function" {:bold true}) 
@@ -142,11 +144,21 @@
   (hl "@field" {:fg accent2 :bold true :nocombine true}) 
   (hl "@field.yaml" {:fg accent2 :bold true :nocombine true}) 
   (hl "@string" {:link :String}) 
+  (hl "@string.regex" {:link :String}) 
   (hl "@string.yaml" {:link :Normal}) 
+  (hl "@boolean" {:italic true}) 
+  (hl "@method.clojure_lsp" {:italic true}) 
   (hl "@definition" {:underline true :bold true})
   (hl "@namespace" {:underline true :bold true :fg accent})
-  (hl "@type" {:bold false :nocombine true})
+  (hl "@type" {:bold false :nocombine true :italic true})
+  (hl "@lsp.type.type" {:link "@type"})
+  (hl "@lsp.type.event" {})
   (hl "@event" {:bold false :nocombine true})
+  (hl "@text.warning" {:fg orange_fg :bold true})
+  (hl "@text.danger" {:fg red :bold true})
+  (hl "@text.reference" { :underline true})
+  (hl "@number.comment" {:fg blue :bold true})
+  (hl "@constant.comment" {:fg purple :bold true})
   (hl :diffAdded {:link :DiffAdd}) 
   (hl :diffRemoved {:link :DiffDelete}) 
   (hl :gitcommitOverflow {:link :ErrorMsg :bold true}) 
@@ -176,7 +188,7 @@
   (hl :diffSubname {:fg accent2}) 
   (hl :TelescopeSelection {:fg ui_fg :bg ui :bold true}) 
   (hl :TelescopeMultiSelection {:bg mix3 :bold true}) 
-  ; (hl :Define {:underline true :bold true}) 
+  (hl "@define" {:underline true :bold true}) 
   (hl "@form.quoted" {:fg mix0}) 
   (hl "@form.unquoted" {:fg :fg :nocombine true}) 
   (hl "@form.meta" {:bg (color.mix accent2 paper 0.80)}) 
@@ -184,7 +196,7 @@
   (hl "@punctuation.delimiter.vec" {:fg accent_mix}) 
   (hl "@punctuation.delimiter.map" {:fg red_mix}) 
   (hl "@punctuation.delimiter.set" {:fg green_mix}) 
-  (hl "@variable.query" {:fg :fg :nocombine true}) 
+  (hl "@variable.query" {:fg :fg :italic true}) 
   (hl :markdownCode {:bold true}) 
   (hl :helpHyperTextJump {:underline true}) 
   (hl :helpOption {:underline true}) 
@@ -230,6 +242,7 @@
          : red
          : green
          : orange
+         : yellow
          : blue
          : purple
          : cyan
@@ -259,6 +272,7 @@
                    : red
                    : green
                    : orange
+                   : yellow
                    : blue
                    : purple
                    : cyan
@@ -278,7 +292,7 @@
   (set vim.g.terminal_color_0 paper)
   (set vim.g.terminal_color_1 red)
   (set vim.g.terminal_color_2 green)
-  (set vim.g.terminal_color_3 orange)
+  (set vim.g.terminal_color_3 yellow)
   (set vim.g.terminal_color_4 blue)
   (set vim.g.terminal_color_5 purple)
   (set vim.g.terminal_color_6 cyan)
@@ -286,7 +300,7 @@
   (set vim.g.terminal_color_8 mix1)
   (set vim.g.terminal_color_9 red_fg)
   (set vim.g.terminal_color_10 green_fg)
-  (set vim.g.terminal_color_11 orange_fg)
+  (set vim.g.terminal_color_11 orange)
   (set vim.g.terminal_color_12 blue_fg)
   (set vim.g.terminal_color_13 purple_fg)
   (set vim.g.terminal_color_14 cyan_fg)
@@ -303,6 +317,7 @@
     :red red
     :green green
     :orange orange
+    :yellow yellow
     :blue blue
     :purple purple
     :cyan cyan
@@ -332,6 +347,7 @@
         red "#732626"
         green "#407326"
         orange "#e68019"
+        yellow "#e1b31a"
         blue "#076678"
         purple "#8f3f71"
         cyan "#43808b"
@@ -363,6 +379,7 @@
         red "#e69999"
         green "#95cf7f"
         orange "#f0b375"
+        yellow "#ad8200"
         blue "#076678"
         purple "#8f3f71"
         cyan "#43808b"
@@ -386,13 +403,14 @@
   (let [fg (fn [c] c)
         paper "#111111"
         text "#e0e0e0"
-        mix0 "#c0c0c0"
+        mix0 "#b0b0b0"
         mix1 "#898989"
         mix2 "#555555"
         mix3 "#303030"
         red "#e15d67"
         green "#5db129"
         orange "#fc804e"
+        yellow "#e1b31a"
         blue "#00a3f2"
         purple "#b46ee0"
         cyan "#21c992"
@@ -403,7 +421,7 @@
         purple_fg "#9e57c2"
         cyan_fg "#00998f"
         accent cyan
-        accent2 orange
+        accent2 purple
         ui (color.saturation (color.mix text paper 0.8) 1.5)
         ui_fg (color.mix text paper 0.1)
         accent_mix (color.mix mix1 accent 0.3)
@@ -416,13 +434,14 @@
   (let [fg (fn [c] c)
         paper "#ffffff"
         text "#333333"
-        mix0 "#444444"
+        mix0 "#555555"
         mix1 "#767676"
         mix2 "#cccccc"
         mix3 "#eeeeee"
         red "#d03e3e"
         green "#31861f"
         orange "#d7691d"
+        yellow "#ad8200"
         blue "#3173c5"
         purple "#9e57c2"
         cyan "#00998f"

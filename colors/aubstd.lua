@@ -6,10 +6,10 @@ local aub = require'aub-theme-nvim.main'
 local colors
 if vim.o.background == "dark" then
   colors = aub.stddark()
-  aub.gstheme(colors)
+  aub.theme(colors)
 else
   colors = aub.stdlight()
-  aub.gstheme(colors)
+  aub.theme(colors)
 end
 
 aub.termcolors(colors)
