@@ -46,7 +46,7 @@ local function theme(_1_)
   local red_mix = _arg_2_["red_mix"]
   local green_mix = _arg_2_["green_mix"]
   hl("Normal", {fg = text, bg = paper})
-  hl("Comment", {fg = accent2, nocombine = true})
+  hl("Comment", {fg = accent2, nocombine = false})
   hl("ColorColumn", {bg = mix3})
   hl("Conceal", {})
   hl("Cursor", {})
@@ -73,6 +73,7 @@ local function theme(_1_)
   hl("CursorLineNr", {bold = true, reverse = true, fg = accent})
   hl("CursorLineSign", {link = "CursorLineNr"})
   hl("MatchParen", {fg = accent, bold = true, bg = color.mix(accent, paper, 0.7)})
+  hl("MatchParenEnd", {bold = true, fg = color.mix(accent, paper, 0.7)})
   hl("ModeMsg", {})
   hl("MsgArea", {})
   hl("MsgSeparator", {})
@@ -134,7 +135,8 @@ local function theme(_1_)
   hl("DiagnosticError", {fg = red_fg})
   hl("DiagnosticWarn", {fg = orange_fg})
   hl("DiagnosticInfo", {fg = blue})
-  hl("DiagnosticHint", {fg = mix2})
+  hl("DiagnosticHint", {fg = mix1})
+  hl("DiagnosticUnnecessary", {fg = mix1})
   hl("DiagnosticVirtualTextError", {bg = color.mix(paper, red_fg, 0.3), fg = red_fg})
   hl("DiagnosticVirtualTextWarn", {bg = color.mix(paper, orange_fg, 0.3), fg = orange_fg})
   hl("DiagnosticVirtualTextInfo", {bg = color.mix(paper, blue, 0.3), fg = blue})
@@ -398,7 +400,7 @@ local function stddark()
     return c
   end
   fg = _8_
-  local paper = "#111111"
+  local paper = "#000000"
   local text = "#e0e0e0"
   local mix0 = "#b0b0b0"
   local mix1 = "#898989"
@@ -433,7 +435,7 @@ local function stdlight()
     return c
   end
   fg = _9_
-  local paper = "#ffffff"
+  local paper = "#f0f0f0"
   local text = "#333333"
   local mix0 = "#555555"
   local mix1 = "#767676"
@@ -462,4 +464,101 @@ local function stdlight()
   return {accent = accent, accent2 = accent2, accent_mix = accent_mix, blue = blue, blue_fg = blue_fg, cyan = cyan, cyan_fg = cyan_fg, green = green, green_fg = green_fg, green_mix = green_mix, mix0 = mix0, mix1 = mix1, mix2 = mix2, mix3 = mix3, orange = orange, orange_fg = orange_fg, paper = paper, purple = purple, purple_fg = purple_fg, red = red, red_fg = red_fg, red_mix = red_mix, text = text, ui = ui, ui_fg = ui_fg, yellow = yellow}
 end
 _2amodule_2a["stdlight"] = stdlight
+local function acmelight()
+  local white = "#ffffff"
+  local black = "#000000"
+  local pale_yellow = "#ffffea"
+  local dark_yellow = "#eeee9e"
+  local dark_green = "#99994c"
+  local pale_blue = "#eaffff"
+  local red = "#aa0000"
+  local green = "#006600"
+  local blue = "#000099"
+  local purple = "#8888cc"
+  local cyan = "#9eeeee"
+  return {white = white, black = black, pale_yellow = pale_yellow, dark_yellow = dark_yellow, dark_green = dark_green, pale_blue = pale_blue, red = red, green = green, blue = blue, purple = purple, cyan = cyan}
+end
+_2amodule_2a["acmelight"] = acmelight
+local function acmetheme(_10_)
+  local _arg_11_ = _10_
+  local white = _arg_11_["white"]
+  local black = _arg_11_["black"]
+  local pale_yellow = _arg_11_["pale_yellow"]
+  local dark_yellow = _arg_11_["dark_yellow"]
+  local dark_green = _arg_11_["dark_green"]
+  local pale_blue = _arg_11_["pale_blue"]
+  local red = _arg_11_["red"]
+  local green = _arg_11_["green"]
+  local blue = _arg_11_["blue"]
+  local purple = _arg_11_["purple"]
+  local cyan = _arg_11_["cyan"]
+  hl("Normal", {fg = black, bg = pale_yellow})
+  hl("Comment", {fg = blue})
+  hl("ColorColumn", {bg = dark_yellow})
+  hl("Conceal", {})
+  hl("Cursor", {})
+  hl("lCursor", {})
+  hl("CursorIM", {})
+  hl("CursorColumn", {})
+  hl("CursorLine", {bg = color.mix(dark_yellow, pale_yellow, 0.9)})
+  hl("Directory", {fg = purple, bold = true})
+  hl("DiffAdd", {bg = color.mix(green, pale_yellow, 0.5)})
+  hl("DiffChange", {})
+  hl("DiffDelete", {bg = color.mix(red, pale_yellow, 0.5)})
+  hl("DiffText", {bg = color.mix(blue, pale_yellow, 0.4)})
+  hl("TermCursor", {reverse = true})
+  hl("TermCursorNC", {})
+  hl("ErrorMsg", {fg = red})
+  hl("WinSeparator", {fg = black})
+  hl("Folded", {bg = dark_yellow})
+  hl("FoldColumn", {link = "Folded"})
+  hl("SignColumn", {})
+  hl("IncSearch", {fg = white, bg = dark_green, bold = true})
+  hl("CurSearch", {fg = black, bg = dark_yellow})
+  hl("Substitute", {fg = white, bg = black})
+  hl("LineNr", {fg = dark_green})
+  hl("CursorLineNr", {bold = true, bg = purple})
+  hl("CursorLineSign", {link = "CursorLineNr"})
+  hl("MatchParen", {fg = blue, bold = true, bg = purple})
+  hl("ModeMsg", {})
+  hl("MsgArea", {})
+  hl("MsgSeparator", {})
+  hl("MoreMsg", {})
+  hl("NonText", {fg = dark_green})
+  hl("NormalFloat", {bg = color.mix(pale_yellow, black, 0.05), fg = "none"})
+  hl("FloatBorder", {bg = color.mix(pale_yellow, black, 0.05), fg = dark_green})
+  hl("Pmenu", {bg = dark_yellow})
+  hl("PmenuSel", {reverse = true})
+  hl("PmenuSbar", {bg = dark_green})
+  hl("PmenuThumb", {})
+  hl("Question", {})
+  hl("QuickFixLine", {})
+  hl("Search", {fg = black, bg = dark_yellow})
+  hl("SpecialKey", {})
+  hl("SpellBad", {undercurl = true, sp = red})
+  hl("StatusLine", {fg = black, bg = pale_blue})
+  hl("StatusLineNC", {fg = dark_green, bg = pale_blue})
+  hl("User1", {fg = blue, bg = pale_blue, bold = true})
+  hl("User2", {fg = red, bg = pale_blue, bold = true})
+  hl("User3", {fg = purple, bg = pale_blue, bold = true})
+  hl("User4", {fg = green, bg = pale_blue, bold = true})
+  hl("StatusModeNormal", {fg = black, bg = pale_blue})
+  hl("StatusModeInsert", {fg = green, bg = pale_blue})
+  hl("StatusModeCommand", {fg = red, bg = pale_blue})
+  hl("StatusModeVisual", {fg = blue, bg = pale_blue})
+  hl("StatusModeVisualBlock", {fg = blue, bg = pale_blue})
+  hl("StatusModeVisualLine", {fg = blue, bg = pale_blue})
+  hl("StatusModeTerminal", {fg = purple, bg = ui})
+  hl("StatusLineError", {bg = pale_blue, fg = red})
+  hl("StatusLineWarn", {bg = pale_blue, fg = dark_green})
+  hl("TabLine", {bg = pale_blue, fg = black})
+  hl("TabLineFill", {bg = pale_blue, fg = black})
+  hl("TabLineSel", {fg = black, bg = cyan})
+  hl("Title", {})
+  hl("Visual", {fg = pale_yellow, bg = black})
+  hl("VisualNOS", {})
+  hl("WarningMsg", {})
+  return hl("Whitespace", {link = "NonText"})
+end
+_2amodule_2a["acmetheme"] = acmetheme
 return _2amodule_2a

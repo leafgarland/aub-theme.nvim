@@ -34,7 +34,7 @@
               : red_mix
               : green_mix}]
   (hl :Normal {:fg text :bg paper})
-  (hl :Comment {:fg accent2 :nocombine true})
+  (hl :Comment {:fg accent2 :nocombine false})
   (hl :ColorColumn {:bg mix3})
   (hl :Conceal {})
   (hl :Cursor {})
@@ -62,6 +62,7 @@
   (hl :CursorLineNr {:bold true :reverse true :fg accent}) 
   (hl :CursorLineSign {:link :CursorLineNr}) 
   (hl :MatchParen {:fg accent :bold true :bg (color.mix accent paper 0.7)}) 
+  (hl :MatchParenEnd {:bold true :fg (color.mix accent paper 0.7)}) 
   (hl :ModeMsg {}) 
   (hl :MsgArea {}) 
   (hl :MsgSeparator {}) 
@@ -123,7 +124,8 @@
   (hl :DiagnosticError {:fg red_fg}) 
   (hl :DiagnosticWarn {:fg orange_fg}) 
   (hl :DiagnosticInfo {:fg blue}) 
-  (hl :DiagnosticHint {:fg mix2}) 
+  (hl :DiagnosticHint {:fg mix1}) 
+  (hl :DiagnosticUnnecessary {:fg mix1}) 
   (hl :DiagnosticVirtualTextError {:bg (color.mix paper red_fg 0.30) :fg red_fg}) 
   (hl :DiagnosticVirtualTextWarn {:bg (color.mix paper orange_fg 0.30) :fg orange_fg}) 
   (hl :DiagnosticVirtualTextInfo {:bg (color.mix paper blue 0.30) :fg blue}) 
@@ -401,7 +403,8 @@
 
 (defn stddark []
   (let [fg (fn [c] c)
-        paper "#111111"
+        ; paper "#111111"
+        paper "#000000"
         text "#e0e0e0"
         mix0 "#b0b0b0"
         mix1 "#898989"
@@ -432,7 +435,7 @@
 
 (defn stdlight []
   (let [fg (fn [c] c)
-        paper "#ffffff"
+        paper "#f0f0f0"
         text "#333333"
         mix0 "#555555"
         mix1 "#767676"
@@ -459,5 +462,236 @@
         red_mix (color.mix mix1 red 0.5)
         green_mix (color.mix mix1 green 0.3)]
     (color-map)))
-  
 
+
+(defn acmelight []
+  (let [white "#ffffff"
+        black "#000000"
+        pale_yellow "#ffffea"
+        dark_yellow "#eeee9e"
+        dark_green "#99994c"
+        pale_blue "#eaffff"
+        red "#aa0000"
+        green "#006600"
+        blue "#000099"
+        purple "#8888cc"
+        cyan "#9eeeee"]
+    {:white white
+     :black black
+     :pale_yellow pale_yellow
+     :dark_yellow dark_yellow
+     :dark_green dark_green
+     :pale_blue pale_blue
+     :red red
+     :green green
+     :blue blue
+     :purple purple
+     :cyan cyan}))
+
+
+(defn acmetheme [{: white
+                  : black
+                  : pale_yellow
+                  : dark_yellow
+                  : dark_green
+                  : pale_blue
+                  : red
+                  : green
+                  : blue
+                  : purple
+                  : cyan}]
+  (hl :Normal {:fg black :bg pale_yellow})
+  (hl :Comment {:fg blue})
+  (hl :ColorColumn {:bg dark_yellow})
+  (hl :Conceal {})
+  (hl :Cursor {})
+  (hl :lCursor {})
+  (hl :CursorIM {})
+  (hl :CursorColumn {})
+  (hl :CursorLine {:bg (color.mix dark_yellow pale_yellow 0.9)})
+  (hl :Directory { :fg purple :bold true})
+  (hl :DiffAdd {:bg (color.mix green pale_yellow 0.5)})
+  (hl :DiffChange {})
+  (hl :DiffDelete {:bg (color.mix red pale_yellow 0.5)})
+  (hl :DiffText {:bg (color.mix blue pale_yellow 0.4)})
+  (hl :TermCursor {:reverse true}) 
+  (hl :TermCursorNC {}) 
+  (hl :ErrorMsg {:fg red}) 
+  (hl :WinSeparator {:fg black}) 
+  (hl :Folded {:bg dark_yellow}) 
+  (hl :FoldColumn {:link :Folded}) 
+  (hl :SignColumn {}) 
+  (hl :IncSearch {:fg white :bg dark_green :bold true}) 
+  (hl :CurSearch {:fg black :bg dark_yellow}) 
+  (hl :Substitute {:fg white :bg black}) 
+  (hl :LineNr {:fg dark_green}) 
+  (hl :CursorLineNr {:bold true :bg purple}) 
+  (hl :CursorLineSign {:link :CursorLineNr}) 
+  (hl :MatchParen {:fg blue :bold true :bg purple}) 
+  (hl :ModeMsg {}) 
+  (hl :MsgArea {}) 
+  (hl :MsgSeparator {}) 
+  (hl :MoreMsg {}) 
+  (hl :NonText {:fg dark_green}) 
+  (hl :NormalFloat {:bg (color.mix pale_yellow black 0.05) :fg "none"}) 
+  (hl :FloatBorder {:bg (color.mix pale_yellow black 0.05) :fg dark_green}) 
+  (hl :Pmenu {:bg dark_yellow}) 
+  (hl :PmenuSel {:reverse true}) 
+  (hl :PmenuSbar {:bg dark_green}) 
+  (hl :PmenuThumb {}) 
+  (hl :Question {}) 
+  (hl :QuickFixLine {}) 
+  (hl :Search {:fg black :bg dark_yellow}) 
+  (hl :SpecialKey {}) 
+  (hl :SpellBad {:undercurl true :sp red}) 
+  (hl :StatusLine {:fg black :bg pale_blue}) 
+  (hl :StatusLineNC {:fg dark_green :bg pale_blue}) 
+  (hl :User1 {:fg blue :bg pale_blue :bold true}) 
+  (hl :User2 {:fg red :bg pale_blue :bold true}) 
+  (hl :User3 {:fg purple :bg pale_blue :bold true}) 
+  (hl :User4 {:fg green :bg pale_blue :bold true}) 
+  (hl :StatusModeNormal {:fg black :bg pale_blue}) 
+  (hl :StatusModeInsert {:fg green :bg pale_blue}) 
+  (hl :StatusModeCommand {:fg red :bg pale_blue}) 
+  (hl :StatusModeVisual {:fg blue :bg pale_blue}) 
+  (hl :StatusModeVisualBlock {:fg blue :bg pale_blue}) 
+  (hl :StatusModeVisualLine {:fg blue :bg pale_blue}) 
+  (hl :StatusModeTerminal {:fg purple :bg ui}) 
+  (hl :StatusLineError {:bg pale_blue :fg red}) 
+  (hl :StatusLineWarn {:bg pale_blue :fg dark_green}) 
+  (hl :TabLine {:bg pale_blue :fg black}) 
+  (hl :TabLineFill {:bg pale_blue :fg black}) 
+  (hl :TabLineSel {:fg black :bg cyan}) 
+  (hl :Title {}) 
+  (hl :Visual {:fg pale_yellow :bg black}) 
+  (hl :VisualNOS {}) 
+  (hl :WarningMsg {}) 
+  (hl :Whitespace {:link :NonText})) 
+  ; (hl :WildMenu {:fg paper :bg text}) 
+  ; (hl :Constant {}) 
+  ; (hl :String {:fg mix1 :italic true}) 
+  ; (hl :Character {:link :String}) 
+  ; (hl :Identifier {}) 
+  ; (hl :Statement {:bold true}) 
+  ; (hl :PreProc {}) 
+  ; (hl :Type {}) 
+  ; (hl :Special {:bold true}) 
+  ; (hl :Delimiter {:bg "none" :fg mix1}) 
+  ; (hl :Underlined {:underline true}) 
+  ; (hl :Ignore {}) 
+  ; (hl :Error {:bg red}) 
+  ; (hl :Todo {:fg accent :bold true}) 
+  ; (hl :LspReferenceText {:fg accent :bold true :underline true}) 
+  ; (hl :LspReferenceRead {:link :LspReferenceText}) 
+  ; (hl :LspReferenceWrite {:link :LspReferenceText}) 
+  ; (hl :DiagnosticError {:fg red_fg}) 
+  ; (hl :DiagnosticWarn {:fg orange_fg}) 
+  ; (hl :DiagnosticInfo {:fg blue}) 
+  ; (hl :DiagnosticHint {:fg mix1}) 
+  ; (hl :DiagnosticUnnecessary {:fg mix1}) 
+  ; (hl :DiagnosticVirtualTextError {:bg (color.mix paper red_fg 0.30) :fg red_fg}) 
+  ; (hl :DiagnosticVirtualTextWarn {:bg (color.mix paper orange_fg 0.30) :fg orange_fg}) 
+  ; (hl :DiagnosticVirtualTextInfo {:bg (color.mix paper blue 0.30) :fg blue}) 
+  ; (hl :DiagnosticVirtualTextHint {:bg (color.mix paper mix2 0.30) :fg mix2}) 
+  ; (hl :LspCodeLens {:link :DiagnosticVirtualTextHint}) 
+  ; (hl :TSStringEscape {:fg accent2})
+  ; (hl :TSFunction {:bold true}) 
+  ; (hl "@punctuation.special" {:fg yellow :bold true}) 
+  ; (hl "@symbol.clojure" {:bold false}) 
+  ; (hl "@symbol.keyword.clojure" {:bold true}) 
+  ; (hl "@function" {:bold true}) 
+  ; (hl "@function.clojure" {:bold true}) 
+  ; (hl "@symbol" {:bold true}) 
+  ; (hl "@symbol.fennel" {:bold true}) 
+  ; (hl "@function.fennel" {:bold true}) 
+  ; (hl "@variable" {:bold false}) 
+  ; (hl "@variable.bash" {:bold true}) 
+  ; (hl "@field" {:fg accent2 :bold true :nocombine true}) 
+  ; (hl "@field.yaml" {:fg accent2 :bold true :nocombine true}) 
+  ; (hl "@string" {:link :String}) 
+  ; (hl "@string.regex" {:link :String}) 
+  ; (hl "@string.yaml" {:link :Normal}) 
+  ; (hl "@boolean" {:italic true}) 
+  ; (hl "@method.clojure_lsp" {:italic true}) 
+  ; (hl "@definition" {:underline true :bold true})
+  ; (hl "@namespace" {:underline true :bold true :fg accent})
+  ; (hl "@type" {:bold false :nocombine true :italic true})
+  ; (hl "@lsp.type.type" {:link "@type"})
+  ; (hl "@lsp.type.event" {})
+  ; (hl "@event" {:bold false :nocombine true})
+  ; (hl "@text.warning" {:fg orange_fg :bold true})
+  ; (hl "@text.danger" {:fg red :bold true})
+  ; (hl "@text.reference" { :underline true})
+  ; (hl "@number.comment" {:fg blue :bold true})
+  ; (hl "@constant.comment" {:fg purple :bold true})
+  ; (hl :diffAdded {:link :DiffAdd}) 
+  ; (hl :diffRemoved {:link :DiffDelete}) 
+  ; (hl :gitcommitOverflow {:link :ErrorMsg :bold true}) 
+  ; (hl :fugitiveUntrackedSection {:fg mix1}) 
+  ; (hl :fugitiveStagedSection {:bold true}) 
+  ; (hl :fugitiveHeading {:bold true}) 
+  ; (hl :fugitiveStagedHeading {:fg accent2 :bold true}) 
+  ; (hl :fugitiveUntrackedHeading {:bold true}) 
+  ; (hl :fugitiveUnstagedHeading {:bold true}) 
+  ; (hl :fugitiveSymbolicRef {:underline true :bold true}) 
+  ; (hl :fugitiveHash {:bold true}) 
+  ; (hl :fugitiveUnstagedModifier {:bold true}) 
+  ; (hl :fugitiveStagedModifier {:fg accent :bold true}) 
+  ; (hl :GitSignsAdd {:fg green_fg}) 
+  ; (hl :GitSignsDelete {:fg red_fg}) 
+  ; (hl :GitSignsAddLn {:link :DiffAdd}) 
+  ; (hl :GitSignsAddNr {:link :DiffAdd :fg text}) 
+  ; (hl :GitSignsDeleteLn {:link :DiffDelete}) 
+  ; (hl :GitSignsDeleteNr {:bg (color.mix red paper 0.5) :fg text}) 
+  ; (hl :GitSignsChange {:fg accent}) 
+  ; (hl :GitSignsChangeLn {:bg (color.mix accent paper 0.60)}) 
+  ; (hl :GitSignsChangeNr {:bg (color.mix accent paper 0.60) :fg text}) 
+  ; (hl :diffFile {:underline true :bold true})
+  ; (hl :diffNewFile {:bold true :fg green_fg}) 
+  ; (hl :diffOldFile {:bold true}) 
+  ; (hl :diffLine {:bold true}) 
+  ; (hl :diffSubname {:fg accent2}) 
+  ; (hl :TelescopeSelection {:fg ui_fg :bg ui :bold true}) 
+  ; (hl :TelescopeMultiSelection {:bg mix3 :bold true}) 
+  ; (hl "@define" {:underline true :bold true}) 
+  ; (hl "@form.quoted" {:fg mix0}) 
+  ; (hl "@form.unquoted" {:fg :fg :nocombine true}) 
+  ; (hl "@form.meta" {:bg (color.mix accent2 paper 0.80)}) 
+  ; (hl "@punctuation.bracket.clojure" {:fg mix1}) 
+  ; (hl "@punctuation.delimiter.vec" {:fg accent_mix}) 
+  ; (hl "@punctuation.delimiter.map" {:fg red_mix}) 
+  ; (hl "@punctuation.delimiter.set" {:fg green_mix}) 
+  ; (hl "@variable.query" {:fg :fg :italic true}) 
+  ; (hl :markdownCode {:bold true}) 
+  ; (hl :helpHyperTextJump {:underline true}) 
+  ; (hl :helpOption {:underline true}) 
+  ; (hl :VisualMarker {:fg red_fg :reverse true :bold true}) 
+  ; (hl :VisualMarkerLine {:bg (color.mix accent paper 0.80)}) 
+  ; (hl :ngxComment {:link :Comment}) 
+  ; (hl :ngxDirective {:bold true}) 
+  ; (hl :ngxDirectiveImportant {:link :ngxDirective}) 
+  ; (hl :ngxDirectiveBlock {:link :ngxDirective}) 
+  ; (hl :ngxVariable {:fg accent}) 
+  ; (hl :ngxVariableBlock {:link :ngxVariable}) 
+  ; (hl :ngxVariableString {:link :ngxVariable}) 
+  ; (hl :ngxString {:bold true}) 
+  ; (hl :DiffviewFilePanelTitle {:link :Normal}) 
+  ; (hl :DiffviewFilePanelCounter {:link :Normal}) 
+  ; (hl :DiffviewFilePanelFileName {:link :Normal}) 
+  ; (hl :typescriptVariable {:bold true}) 
+  ; (hl :typescriptFuncName {:link :Define}) 
+  ; (hl :typescriptParens {:link :Delimiter}) 
+  ; (hl :typescriptTypeReference {:bold true}) 
+  ; (hl :typescriptPredefinedType {:bold true}) 
+  ; (hl :typescriptTemplateSB {:fg accent2 :bold true}) 
+  ; (hl :typescriptArrayMethod {}) 
+  ; (hl :cPreCondit {:fg mix1}) 
+  ; (hl :cDefine {:fg mix0 :bold true}) 
+  ; (hl :cTypeDef {:italic true}) 
+  ; (hl :cType {:bold true}) 
+  ; (hl :cStructure {:bold true}) 
+  ; (hl :cStorageClass {:bold true}) 
+  ; (hl "@constant.regex" {:fg green_fg}) 
+  ; (hl "@operator.regex" {:fg accent}) 
+  ; (hl "@string.escape.regex" {:fg accent2})
+  ; (hl "@NonText" {:link :NonText}))
