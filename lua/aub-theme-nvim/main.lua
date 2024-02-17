@@ -13,6 +13,8 @@ end
 local color, hsl = require("aub-theme-nvim.color"), require("external.hsluv")
 do end (_2amodule_locals_2a)["color"] = color
 _2amodule_locals_2a["hsl"] = hsl
+local use_italics = false
+_2amodule_2a["use_italics"] = use_italics
 local function hl(name, val)
   return vim.api.nvim_set_hl(0, name, val)
 end
@@ -45,11 +47,12 @@ local function theme(_1_)
   local accent_mix = _arg_2_["accent_mix"]
   local red_mix = _arg_2_["red_mix"]
   local green_mix = _arg_2_["green_mix"]
+  local use_italics0 = _arg_2_["use_italics"]
   hl("Normal", {fg = text, bg = paper})
   hl("Comment", {fg = accent2, nocombine = false})
   hl("ColorColumn", {bg = mix3})
   hl("Conceal", {})
-  hl("Cursor", {})
+  hl("Cursor", {fg = paper, bg = text})
   hl("lCursor", {})
   hl("CursorIM", {})
   hl("CursorColumn", {})
@@ -58,7 +61,7 @@ local function theme(_1_)
   hl("DiffAdd", {bg = color.mix(green, paper, 0.5)})
   hl("DiffChange", {})
   hl("DiffDelete", {bg = color.mix(red, paper, 0.5)})
-  hl("DiffText", {bg = color.mix(blue, paper, 0.4)})
+  hl("DiffText", {bg = color.mix(blue, paper, 0.7)})
   hl("TermCursor", {reverse = true})
   hl("TermCursorNC", {})
   hl("ErrorMsg", {fg = red_fg})
@@ -111,17 +114,17 @@ local function theme(_1_)
   hl("TabLineFill", {bg = ui, fg = mix2})
   hl("TabLineSel", {fg = paper, bg = mix0})
   hl("Title", {})
-  hl("Visual", {fg = paper, bg = text})
+  hl("Visual", {fg = paper, bg = mix0})
   hl("VisualNOS", {})
   hl("WarningMsg", {})
   hl("Whitespace", {link = "NonText"})
   hl("WildMenu", {fg = paper, bg = text})
   hl("Constant", {})
-  hl("String", {fg = mix1, italic = true})
+  hl("String", {fg = green_mix, italic = use_italics0})
   hl("Character", {link = "String"})
-  hl("Identifier", {})
+  hl("Identifier", {bold = true})
   hl("Statement", {bold = true})
-  hl("PreProc", {})
+  hl("PreProc", {bold = true})
   hl("Type", {})
   hl("Special", {bold = true})
   hl("Delimiter", {bg = "none", fg = mix1})
@@ -129,7 +132,7 @@ local function theme(_1_)
   hl("Ignore", {})
   hl("Error", {bg = red})
   hl("Todo", {fg = accent, bold = true})
-  hl("LspReferenceText", {fg = accent, bold = true, underline = true})
+  hl("LspReferenceText", {underline = true, sp = accent})
   hl("LspReferenceRead", {link = "LspReferenceText"})
   hl("LspReferenceWrite", {link = "LspReferenceText"})
   hl("DiagnosticError", {fg = red_fg})
@@ -159,17 +162,22 @@ local function theme(_1_)
   hl("@string", {link = "String"})
   hl("@string.regex", {link = "String"})
   hl("@string.yaml", {link = "Normal"})
-  hl("@boolean", {italic = true})
-  hl("@method.clojure_lsp", {italic = true})
+  hl("@boolean", {italic = use_italics0})
+  hl("@method.clojure_lsp", {italic = use_italics0})
   hl("@definition", {underline = true, bold = true})
   hl("@namespace", {underline = true, bold = true, fg = accent})
-  hl("@type", {nocombine = true, italic = true, bold = false})
+  hl("@type", {nocombine = true, italic = use_italics0, bold = false})
   hl("@lsp.type.type", {link = "@type"})
   hl("@lsp.type.event", {})
   hl("@event", {nocombine = true, bold = false})
   hl("@text.warning", {fg = orange_fg, bold = true})
   hl("@text.danger", {fg = red, bold = true})
   hl("@text.reference", {underline = true})
+  hl("@text.title.1", {bold = true, fg = accent})
+  hl("@text.title.2", {bold = true})
+  hl("@text.title.3", {bold = true})
+  hl("@text.title.4", {standout = true})
+  hl("@text.literal.block", {fg = mix0})
   hl("@number.comment", {fg = blue, bold = true})
   hl("@constant.comment", {fg = purple, bold = true})
   hl("diffAdded", {link = "DiffAdd"})
@@ -204,12 +212,13 @@ local function theme(_1_)
   hl("@define", {underline = true, bold = true})
   hl("@form.quoted", {fg = mix0})
   hl("@form.unquoted", {fg = "fg", nocombine = true})
-  hl("@form.meta", {bg = color.mix(accent2, paper, 0.8)})
+  hl("@Meta", {bg = color.mix(accent2, paper, 0.7)})
+  hl("@form.meta", {link = "@Meta"})
   hl("@punctuation.bracket.clojure", {fg = mix1})
   hl("@punctuation.delimiter.vec", {fg = accent_mix})
   hl("@punctuation.delimiter.map", {fg = red_mix})
-  hl("@punctuation.delimiter.set", {fg = green_mix})
-  hl("@variable.query", {fg = "fg", italic = true})
+  hl("@punctuation.delimiter.set", {fg = green_mix, bold = true})
+  hl("@variable.query", {fg = "fg", italic = use_italics0})
   hl("markdownCode", {bold = true})
   hl("helpHyperTextJump", {underline = true})
   hl("helpOption", {underline = true})
@@ -235,14 +244,16 @@ local function theme(_1_)
   hl("typescriptArrayMethod", {})
   hl("cPreCondit", {fg = mix1})
   hl("cDefine", {fg = mix0, bold = true})
-  hl("cTypeDef", {italic = true})
+  hl("cTypeDef", {italic = use_italics0})
   hl("cType", {bold = true})
   hl("cStructure", {bold = true})
   hl("cStorageClass", {bold = true})
   hl("@constant.regex", {fg = green_fg})
   hl("@operator.regex", {fg = accent})
   hl("@string.escape.regex", {fg = accent2})
-  return hl("@NonText", {link = "NonText"})
+  hl("@NonText", {link = "NonText"})
+  hl("BqfPreviewFloat", {link = "NormalFloat"})
+  return hl("BqfPreviewTitle", {link = "NormalFloat"})
 end
 _2amodule_2a["theme"] = theme
 local function gstheme(palette)
@@ -394,12 +405,47 @@ local function light()
   return {accent = accent, accent2 = accent2, accent_mix = accent_mix, blue = blue, blue_fg = blue_fg, cyan = cyan, cyan_fg = cyan_fg, green = green, green_fg = green_fg, green_mix = green_mix, mix0 = mix0, mix1 = mix1, mix2 = mix2, mix3 = mix3, orange = orange, orange_fg = orange_fg, paper = paper, purple = purple, purple_fg = purple_fg, red = red, red_fg = red_fg, red_mix = red_mix, text = text, ui = ui, ui_fg = ui_fg, yellow = yellow}
 end
 _2amodule_2a["light"] = light
-local function stddark()
+local function nvimdark()
   local fg
   local function _8_(c)
     return c
   end
   fg = _8_
+  local paper = "#000000"
+  local text = "#ebeef5"
+  local mix0 = "#c4c6cd"
+  local mix1 = "#9b9ea4"
+  local mix2 = "#4f5258"
+  local mix3 = "#2c2e33"
+  local red = "#5e0009"
+  local green = "#015825"
+  local orange = "#fc804e"
+  local yellow = "#6e5600"
+  local blue = "#005078"
+  local purple = "#4c0049"
+  local cyan = "#007676"
+  local red_fg = "#ffbcb5"
+  local green_fg = "#aaedb7"
+  local orange_fg = "#d7691d"
+  local blue_fg = "#9fd8ff"
+  local purple_fg = "#ffc3fa"
+  local cyan_fg = "#83efef"
+  local accent = cyan
+  local accent2 = green
+  local ui = color.saturation(color.mix(text, paper, 0.8), 1.5)
+  local ui_fg = color.mix(text, paper, 0.1)
+  local accent_mix = color.mix(mix1, accent, 0.3)
+  local red_mix = color.mix(mix1, red, 0.5)
+  local green_mix = color.mix(mix1, green, 0.3)
+  return {accent = accent, accent2 = accent2, accent_mix = accent_mix, blue = blue, blue_fg = blue_fg, cyan = cyan, cyan_fg = cyan_fg, green = green, green_fg = green_fg, green_mix = green_mix, mix0 = mix0, mix1 = mix1, mix2 = mix2, mix3 = mix3, orange = orange, orange_fg = orange_fg, paper = paper, purple = purple, purple_fg = purple_fg, red = red, red_fg = red_fg, red_mix = red_mix, text = text, ui = ui, ui_fg = ui_fg, yellow = yellow}
+end
+_2amodule_2a["nvimdark"] = nvimdark
+local function stddark()
+  local fg
+  local function _9_(c)
+    return c
+  end
+  fg = _9_
   local paper = "#000000"
   local text = "#e0e0e0"
   local mix0 = "#b0b0b0"
@@ -431,11 +477,11 @@ end
 _2amodule_2a["stddark"] = stddark
 local function stdlight()
   local fg
-  local function _9_(c)
+  local function _10_(c)
     return c
   end
-  fg = _9_
-  local paper = "#f0f0f0"
+  fg = _10_
+  local paper = "#f6f6ef"
   local text = "#333333"
   local mix0 = "#555555"
   local mix1 = "#767676"
@@ -479,19 +525,19 @@ local function acmelight()
   return {white = white, black = black, pale_yellow = pale_yellow, dark_yellow = dark_yellow, dark_green = dark_green, pale_blue = pale_blue, red = red, green = green, blue = blue, purple = purple, cyan = cyan}
 end
 _2amodule_2a["acmelight"] = acmelight
-local function acmetheme(_10_)
-  local _arg_11_ = _10_
-  local white = _arg_11_["white"]
-  local black = _arg_11_["black"]
-  local pale_yellow = _arg_11_["pale_yellow"]
-  local dark_yellow = _arg_11_["dark_yellow"]
-  local dark_green = _arg_11_["dark_green"]
-  local pale_blue = _arg_11_["pale_blue"]
-  local red = _arg_11_["red"]
-  local green = _arg_11_["green"]
-  local blue = _arg_11_["blue"]
-  local purple = _arg_11_["purple"]
-  local cyan = _arg_11_["cyan"]
+local function acmetheme(_11_)
+  local _arg_12_ = _11_
+  local white = _arg_12_["white"]
+  local black = _arg_12_["black"]
+  local pale_yellow = _arg_12_["pale_yellow"]
+  local dark_yellow = _arg_12_["dark_yellow"]
+  local dark_green = _arg_12_["dark_green"]
+  local pale_blue = _arg_12_["pale_blue"]
+  local red = _arg_12_["red"]
+  local green = _arg_12_["green"]
+  local blue = _arg_12_["blue"]
+  local purple = _arg_12_["purple"]
+  local cyan = _arg_12_["cyan"]
   hl("Normal", {fg = black, bg = pale_yellow})
   hl("Comment", {fg = blue})
   hl("ColorColumn", {bg = dark_yellow})

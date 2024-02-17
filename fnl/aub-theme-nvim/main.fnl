@@ -2,6 +2,7 @@
   {require {hsl external.hsluv
             color aub-theme-nvim.color}})
 
+(def use_italics false)
 
 (defn hl [name val]
   (vim.api.nvim_set_hl 0 name val))
@@ -32,12 +33,13 @@
               : ui_fg
               : accent_mix
               : red_mix
-              : green_mix}]
+              : green_mix
+              : use_italics}]
   (hl :Normal {:fg text :bg paper})
   (hl :Comment {:fg accent2 :nocombine false})
   (hl :ColorColumn {:bg mix3})
   (hl :Conceal {})
-  (hl :Cursor {})
+  (hl :Cursor { :fg paper :bg text})
   (hl :lCursor {})
   (hl :CursorIM {})
   (hl :CursorColumn {})
@@ -46,7 +48,7 @@
   (hl :DiffAdd {:bg (color.mix green paper 0.5)})
   (hl :DiffChange {})
   (hl :DiffDelete {:bg (color.mix red paper 0.5)})
-  (hl :DiffText {:bg (color.mix blue paper 0.4)})
+  (hl :DiffText {:bg (color.mix blue paper 0.7)})
   ; (hl :DiffText {:fg paper :bg accent})
   (hl :TermCursor {:reverse true}) 
   (hl :TermCursorNC {}) 
@@ -100,17 +102,18 @@
   (hl :TabLineFill {:bg ui :fg mix2}) 
   (hl :TabLineSel {:fg paper :bg mix0}) 
   (hl :Title {}) 
-  (hl :Visual {:fg paper :bg text}) 
+  (hl :Visual {:fg paper :bg mix0}) 
   (hl :VisualNOS {}) 
   (hl :WarningMsg {}) 
   (hl :Whitespace {:link :NonText}) 
   (hl :WildMenu {:fg paper :bg text}) 
   (hl :Constant {}) 
-  (hl :String {:fg mix1 :italic true}) 
+  ; (hl :String {:fg mix1 :italic use_italics}) 
+  (hl :String {:fg green_mix :italic use_italics}) 
   (hl :Character {:link :String}) 
-  (hl :Identifier {}) 
+  (hl :Identifier {:bold true}) 
   (hl :Statement {:bold true}) 
-  (hl :PreProc {}) 
+  (hl :PreProc {:bold true}) 
   (hl :Type {}) 
   (hl :Special {:bold true}) 
   (hl :Delimiter {:bg "none" :fg mix1}) 
@@ -118,7 +121,7 @@
   (hl :Ignore {}) 
   (hl :Error {:bg red}) 
   (hl :Todo {:fg accent :bold true}) 
-  (hl :LspReferenceText {:fg accent :bold true :underline true}) 
+  (hl :LspReferenceText {:underline true :sp accent}) 
   (hl :LspReferenceRead {:link :LspReferenceText}) 
   (hl :LspReferenceWrite {:link :LspReferenceText}) 
   (hl :DiagnosticError {:fg red_fg}) 
@@ -148,17 +151,22 @@
   (hl "@string" {:link :String}) 
   (hl "@string.regex" {:link :String}) 
   (hl "@string.yaml" {:link :Normal}) 
-  (hl "@boolean" {:italic true}) 
-  (hl "@method.clojure_lsp" {:italic true}) 
+  (hl "@boolean" {:italic use_italics}) 
+  (hl "@method.clojure_lsp" {:italic use_italics}) 
   (hl "@definition" {:underline true :bold true})
   (hl "@namespace" {:underline true :bold true :fg accent})
-  (hl "@type" {:bold false :nocombine true :italic true})
+  (hl "@type" {:bold false :nocombine true :italic use_italics})
   (hl "@lsp.type.type" {:link "@type"})
   (hl "@lsp.type.event" {})
   (hl "@event" {:bold false :nocombine true})
   (hl "@text.warning" {:fg orange_fg :bold true})
   (hl "@text.danger" {:fg red :bold true})
   (hl "@text.reference" { :underline true})
+  (hl "@text.title.1" {:bold true :fg accent})
+  (hl "@text.title.2" {:bold true})
+  (hl "@text.title.3" {:bold true})
+  (hl "@text.title.4" {:standout true})
+  (hl "@text.literal.block" {:fg mix0})
   (hl "@number.comment" {:fg blue :bold true})
   (hl "@constant.comment" {:fg purple :bold true})
   (hl :diffAdded {:link :DiffAdd}) 
@@ -193,12 +201,13 @@
   (hl "@define" {:underline true :bold true}) 
   (hl "@form.quoted" {:fg mix0}) 
   (hl "@form.unquoted" {:fg :fg :nocombine true}) 
-  (hl "@form.meta" {:bg (color.mix accent2 paper 0.80)}) 
+  (hl "@Meta" {:bg (color.mix accent2 paper 0.70)}) 
+  (hl "@form.meta" {:link "@Meta"}) 
   (hl "@punctuation.bracket.clojure" {:fg mix1}) 
   (hl "@punctuation.delimiter.vec" {:fg accent_mix}) 
   (hl "@punctuation.delimiter.map" {:fg red_mix}) 
-  (hl "@punctuation.delimiter.set" {:fg green_mix}) 
-  (hl "@variable.query" {:fg :fg :italic true}) 
+  (hl "@punctuation.delimiter.set" {:fg green_mix :bold true}) 
+  (hl "@variable.query" {:fg :fg :italic use_italics}) 
   (hl :markdownCode {:bold true}) 
   (hl :helpHyperTextJump {:underline true}) 
   (hl :helpOption {:underline true}) 
@@ -224,14 +233,16 @@
   (hl :typescriptArrayMethod {}) 
   (hl :cPreCondit {:fg mix1}) 
   (hl :cDefine {:fg mix0 :bold true}) 
-  (hl :cTypeDef {:italic true}) 
+  (hl :cTypeDef {:italic use_italics}) 
   (hl :cType {:bold true}) 
   (hl :cStructure {:bold true}) 
   (hl :cStorageClass {:bold true}) 
   (hl "@constant.regex" {:fg green_fg}) 
   (hl "@operator.regex" {:fg accent}) 
   (hl "@string.escape.regex" {:fg accent2})
-  (hl "@NonText" {:link :NonText}))
+  (hl "@NonText" {:link :NonText})
+  (hl "BqfPreviewFloat" {:link :NormalFloat})
+  (hl "BqfPreviewTitle" {:link :NormalFloat}))
 
 
 (defn gstheme [palette]
@@ -401,6 +412,37 @@
     (color-map)))
 
 
+(defn nvimdark []
+  (let [fg (fn [c] c)
+        paper "#000000"
+        text "#ebeef5" ;"NvimLightGrey1"
+        mix0 "#c4c6cd" ;"NvimLightGrey3"
+        mix1 "#9b9ea4" ;"NvimLightGrey4"
+        mix2 "#4f5258" ;"NvimDarkGrey4"
+        mix3 "#2c2e33" ;"NvimDarkGrey3"
+        red "#5e0009" ;"NvimDarkRed"
+        green "#015825" ;"NvimDarkGreen"
+        orange "#fc804e"
+        yellow "#6e5600" ;"NvimDarkYellow"
+        blue "#005078" ;"NvimDarkBlue"
+        purple "#4c0049" ;"NvimDarkMagenta"
+        cyan "#007676" ;"NvimDarkCyan"
+        red_fg "#ffbcb5" ;"NvimLightRed"
+        green_fg "#aaedb7" ;"NvimLightGreen"
+        orange_fg "#d7691d"
+        blue_fg "#9fd8ff" ;"NvimLightBlue"
+        purple_fg "#ffc3fa" ;"NvimLightMagenta"
+        cyan_fg "#83efef" ;"NvimLightCyan"
+        accent cyan
+        accent2 green
+        ui (color.saturation (color.mix text paper 0.8) 1.5)
+        ui_fg (color.mix text paper 0.1)
+        accent_mix (color.mix mix1 accent 0.3)
+        red_mix (color.mix mix1 red 0.5)
+        green_mix (color.mix mix1 green 0.3)]
+    (color-map)))
+
+
 (defn stddark []
   (let [fg (fn [c] c)
         ; paper "#111111"
@@ -435,7 +477,8 @@
 
 (defn stdlight []
   (let [fg (fn [c] c)
-        paper "#f0f0f0"
+        ; paper "#ffffff"
+        paper "#f6f6ef"
         text "#333333"
         mix0 "#555555"
         mix1 "#767676"
@@ -569,7 +612,7 @@
   (hl :Whitespace {:link :NonText})) 
   ; (hl :WildMenu {:fg paper :bg text}) 
   ; (hl :Constant {}) 
-  ; (hl :String {:fg mix1 :italic true}) 
+  ; (hl :String {:fg mix1 :italic use_italics}) 
   ; (hl :Character {:link :String}) 
   ; (hl :Identifier {}) 
   ; (hl :Statement {:bold true}) 
@@ -611,11 +654,11 @@
   ; (hl "@string" {:link :String}) 
   ; (hl "@string.regex" {:link :String}) 
   ; (hl "@string.yaml" {:link :Normal}) 
-  ; (hl "@boolean" {:italic true}) 
-  ; (hl "@method.clojure_lsp" {:italic true}) 
+  ; (hl "@boolean" {:italic use_italics}) 
+  ; (hl "@method.clojure_lsp" {:italic use_italics}) 
   ; (hl "@definition" {:underline true :bold true})
   ; (hl "@namespace" {:underline true :bold true :fg accent})
-  ; (hl "@type" {:bold false :nocombine true :italic true})
+  ; (hl "@type" {:bold false :nocombine true :italic use_italics})
   ; (hl "@lsp.type.type" {:link "@type"})
   ; (hl "@lsp.type.event" {})
   ; (hl "@event" {:bold false :nocombine true})
@@ -661,7 +704,7 @@
   ; (hl "@punctuation.delimiter.vec" {:fg accent_mix}) 
   ; (hl "@punctuation.delimiter.map" {:fg red_mix}) 
   ; (hl "@punctuation.delimiter.set" {:fg green_mix}) 
-  ; (hl "@variable.query" {:fg :fg :italic true}) 
+  ; (hl "@variable.query" {:fg :fg :italic use_italics}) 
   ; (hl :markdownCode {:bold true}) 
   ; (hl :helpHyperTextJump {:underline true}) 
   ; (hl :helpOption {:underline true}) 
@@ -687,7 +730,7 @@
   ; (hl :typescriptArrayMethod {}) 
   ; (hl :cPreCondit {:fg mix1}) 
   ; (hl :cDefine {:fg mix0 :bold true}) 
-  ; (hl :cTypeDef {:italic true}) 
+  ; (hl :cTypeDef {:italic use_italics}) 
   ; (hl :cType {:bold true}) 
   ; (hl :cStructure {:bold true}) 
   ; (hl :cStorageClass {:bold true}) 
